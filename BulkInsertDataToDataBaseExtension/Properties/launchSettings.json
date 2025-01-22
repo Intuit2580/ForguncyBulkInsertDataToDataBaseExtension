@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BulkInsertDataToDataBaseExtension": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Forguncy 10\\Website\\designerBin\\Forguncy.exe"
+    }
+  }
+}
