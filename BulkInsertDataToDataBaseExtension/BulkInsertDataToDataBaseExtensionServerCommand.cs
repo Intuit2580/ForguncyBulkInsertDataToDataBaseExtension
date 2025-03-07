@@ -51,12 +51,12 @@ namespace BulkInsertDataToDataBaseExtension
             var connectionString = dataAccess.GetConnectionStringByID(Connection);
 
             var dataList = await dataContext.EvaluateFormulaAsync(DataList);
-            if (!(dataList is List<Dictionary<string, object>> list)) return null;
+            //if (!(dataList is List<Dictionary<string, object>> list)) return null;
             
             var tableName = (await dataContext.EvaluateFormulaAsync(TableName)).ToString();
             if (string.IsNullOrWhiteSpace(tableName)) return null;
 
-            var dataTable = ConvertListToDataTableHelper.ListToDataTable(list, CustomPropertyList);
+            var dataTable = ConvertListToDataTableHelper.ListToDataTable(dataList, CustomPropertyList);
             
             
             await ImportDataToDataBaseAsync(connectionString, tableName, dataTable);
