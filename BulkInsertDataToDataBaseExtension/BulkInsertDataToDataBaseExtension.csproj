@@ -54,6 +54,7 @@
 	<ItemGroup>
 	  <PackageReference Include="Enums.NET" Version="4.0.0" />
 	  <PackageReference Include="MySqlConnector" Version="2.1.2" />
+	  <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.8.0" />
 	  <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 	</ItemGroup>
 	<ItemGroup>

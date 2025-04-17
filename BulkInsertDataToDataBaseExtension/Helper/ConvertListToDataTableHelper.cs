@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace BulkInsertDataToDataBaseExtension.Helper
 {
-    public class ConvertListToDataTableHelper
+    public static class ConvertListToDataTableHelper
     {
         public static DataTable ListToDataTable(object dataList, List<PropertyListDto> propertyList)
         {
@@ -33,7 +33,7 @@ namespace BulkInsertDataToDataBaseExtension.Helper
                 
                 foreach (var property in propertyList.Where(property => item.ContainsKey(property.PropertyName)))
                 {
-                    dataRow[property.PropertyName] = item[property.PropertyName];
+                    dataRow[property.PropertyName] = ParseData(item[property.PropertyName], property);
                 }
 
                 dataTable.Rows.Add(dataRow);
@@ -58,7 +58,7 @@ namespace BulkInsertDataToDataBaseExtension.Helper
                 
                 foreach (var property in propertyList.Where(property => dic.ContainsKey(property.PropertyName)))
                 {
-                    dataRow[property.PropertyName] = dic[property.PropertyName];
+                    dataRow[property.PropertyName] = ParseData(dic[property.PropertyName], property);
                 }
 
                 dataTable.Rows.Add(dataRow);
@@ -82,13 +82,23 @@ namespace BulkInsertDataToDataBaseExtension.Helper
                 var existProperty = propertyList.Where(property => dic.ContainsKey(property.PropertyName));
                 foreach (var property in existProperty)
                 {
-                    dataRow[property.PropertyName] = dic[property.PropertyName];
+                    dataRow[property.PropertyName] = ParseData(((JValue)dic[property.PropertyName]).Value, property);
                 }
                 
                 dataTable.Rows.Add(dataRow);
             }
 
             return dataTable;
+        }
+
+        private static object ParseData(object data, PropertyListDto property)
+        {
+            if (property.IsDateTime && data is double d)
+            {
+                return DateTime.FromOADate(d);
+            }
+            
+            return data;
         }
         
     }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BulkInsertDataToDataBaseExtension")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8cee10e2366938de59012cae23df562fedb5c27")]
 [assembly: System.Reflection.AssemblyProductAttribute("BulkInsertDataToDataBaseExtension")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BulkInsertDataToDataBaseExtension")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

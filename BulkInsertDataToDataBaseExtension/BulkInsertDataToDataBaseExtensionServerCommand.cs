@@ -47,17 +47,17 @@ namespace BulkInsertDataToDataBaseExtension
         {
             if (CustomPropertyList == null || CustomPropertyList.Count == 0) return null;
             
-            var dataAccess = dataContext.DataAccess;
-            var connectionString = dataAccess.GetConnectionStringByID(Connection);
-
+            var tableName = (await dataContext.EvaluateFormulaAsync(TableName)).ToString();
+            if (string.IsNullOrWhiteSpace(tableName)) return null;
+            
             var dataList = await dataContext.EvaluateFormulaAsync(DataList);
             //if (!(dataList is List<Dictionary<string, object>> list)) return null;
             
-            var tableName = (await dataContext.EvaluateFormulaAsync(TableName)).ToString();
-            if (string.IsNullOrWhiteSpace(tableName)) return null;
 
             var dataTable = ConvertListToDataTableHelper.ListToDataTable(dataList, CustomPropertyList);
             
+            var dataAccess = dataContext.DataAccess;
+            var connectionString = dataAccess.GetConnectionStringByID(Connection);
             
             await ImportDataToDataBaseAsync(connectionString, tableName, dataTable);
             
@@ -86,6 +86,9 @@ namespace BulkInsertDataToDataBaseExtension
                 case (int)DataBaseTypeEnum.MySql:
                     await InsertDataToDataBaseHelper.InsertDataToMySqlAsync(connectionString, tableName, dataTable, CustomPropertyList);
                     break;
+                /*case (int)DataBaseTypeEnum.Oracle:
+                    await InsertDataToDataBaseHelper.InsertDataToOracleAsync(connectionString, tableName, dataTable, CustomPropertyList);
+                    break;*/
             }
         }
     }

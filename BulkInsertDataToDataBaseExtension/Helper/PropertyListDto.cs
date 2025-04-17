@@ -13,5 +13,8 @@ namespace BulkInsertDataToDataBaseExtension.Helper
         [Required]
         [DisplayName("属性名")]
         public string PropertyName { get; set; }
+        
+        [DisplayName("是否为日期")]
+        public bool IsDateTime { get; set; }
     }
 }
