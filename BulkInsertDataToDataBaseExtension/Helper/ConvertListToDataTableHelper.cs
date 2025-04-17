@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace BulkInsertDataToDataBaseExtension.Helper
             return dataList switch
             {
                 List<Dictionary<string, object>> dictionaryList => ConvertFromDictionaryList(dictionaryList, propertyList),
+                ArrayList arrayList => ConvertFromArrayList(arrayList, propertyList),
                 JArray jArray => ConvertFromJArray(jArray, propertyList),
                 _ => new DataTable()
             };
@@ -32,6 +34,31 @@ namespace BulkInsertDataToDataBaseExtension.Helper
                 foreach (var property in propertyList.Where(property => item.ContainsKey(property.PropertyName)))
                 {
                     dataRow[property.PropertyName] = item[property.PropertyName];
+                }
+
+                dataTable.Rows.Add(dataRow);
+            }
+
+            return dataTable;
+        }
+        
+        private static DataTable ConvertFromArrayList(ArrayList list, List<PropertyListDto> propertyList)
+        {
+            
+
+            var dataTable = new DataTable();
+            
+            dataTable.Columns.AddRange(propertyList.Select(p => new DataColumn(p.PropertyName)).ToArray());
+            
+            foreach (var item in list)
+            {
+                var dic = item as Dictionary<string, object>;
+
+                var dataRow = dataTable.NewRow();
+                
+                foreach (var property in propertyList.Where(property => dic.ContainsKey(property.PropertyName)))
+                {
+                    dataRow[property.PropertyName] = dic[property.PropertyName];
                 }
 
                 dataTable.Rows.Add(dataRow);

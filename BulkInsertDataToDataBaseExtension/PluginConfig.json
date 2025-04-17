@@ -12,8 +12,8 @@
   "name": "批量插入数据",
   "pluginType": "command",
   "guid": "b340dbf4-0bdf-4877-808c-4f58d3525e9f",
-  "version": "1.0.0.0",
-  "dependenceVersion": "10.0.103.0",
+  "version": "1.0.1.0",
+  "dependenceVersion": "10.0.104.0",
   "bundleJavaScript": true,
   "bundleCSS": true
 }
