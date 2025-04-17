@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace BulkInsertDataToDataBaseExtension.Helper
 {
-    public class ConvertListToDataTableHelper
+    public static class ConvertListToDataTableHelper
     {
         public static DataTable ListToDataTable(object dataList, List<PropertyListDto> propertyList)
         {
